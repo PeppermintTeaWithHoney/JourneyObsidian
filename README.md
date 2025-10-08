@@ -1,0 +1,2 @@
+# JourneyObsidian
+My Obsidian Notes
