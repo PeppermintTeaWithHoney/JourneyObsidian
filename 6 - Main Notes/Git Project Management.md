@@ -110,11 +110,32 @@ First you have to go into the directory and write git init. After that you git a
 
 
 
+## Branches (git merge and git checkout)
+
+If you have a product in production and you want to keep developing it make sense to make a new branch for it. you can use git checkout for that. The standard branch is main if we want to make a new branch we would write git checkout -b. The -b flag creates a new branch and activates it right.
+You can work in this branch like you did in the main branch but when you try to push it will not work.  You will have to write git push --set-upstream origin "name".
+
+Now imagine you have to fix a bug in the main branch again, so we go back with git checkout main, fix the bug and switch back the development branch. Now we have to fix the bug here too, how can we do that? we use git cherry-pick "id of the change".
 
 
+Merging:
+After we are done developing features on the developer branch we want to merge it back to the main branch. So we go back to main with git checkout main and start the merge with git merge new_branch 
 
 
+Merge conflict:
 
+After merging it can happen that there is a merge conflict. We check it out with git status and we see which file needs to be edited. We open the file and look for 
+
+<<<<<<<<<<<<< HEAD
+something we wrote
+============
+something we wrote in the other branch
+
+ ,> > > > >> > > > > other branch name
+
+we just edit it to what we want and write git commit -a -m "resolved merge conflict".
+
+The other branch will still exist, even after the changes. We can delete it with git branch -d nameofthebranch
 
 
 

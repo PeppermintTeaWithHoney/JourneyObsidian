@@ -14,7 +14,9 @@ After that press Ctrl + t and choose the template note called Main Note.
 To make a new tag use double square brackets and press on the tag to create a new note, we can store in our Tag folder.
 
 
+Obsidian git
 
+To to add commit and push obsidian to your repo using the community git plugin press ctrl + p
 
 
 
@@ -29,3 +31,6 @@ To make a new tag use double square brackets and press on the tag to create a ne
 
 
 # References
+
+
+Youtube : https://www.youtube.com/watch?v=hSTy_BInQs8&t=1058s
