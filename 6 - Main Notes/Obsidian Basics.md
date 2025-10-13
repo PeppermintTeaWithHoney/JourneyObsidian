@@ -16,7 +16,7 @@ To make a new tag use double square brackets and press on the tag to create a ne
 
 Obsidian git
 
-To to add commit and push obsidian to your repo using the community git plugin press ctrl + p
+To to add commit and push obsidian to your repo using the community git plugin press Ctrl + p and press git commit and sync
 
 
 

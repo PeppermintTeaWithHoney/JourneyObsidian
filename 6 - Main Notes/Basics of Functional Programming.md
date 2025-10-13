@@ -1,8 +1,9 @@
-2025-10-09 15:08
+22025-10-09 15:08
 
 Status: Ongoing
 
-Tags:
+Tags:  [[Programming]] [[Functional Programming]]
+
 
 # Functional Programming
 
@@ -122,6 +123,65 @@ def get_player_position(position, velocity, friction, gravity):
 ```
 
 now we can use print statements to debug this
+
+
+
+## Functional Programming vs Object Oriented Programming
+
+One isn't better than the other, they don't even contradict themselves, besides inheritance. A good programmer knows both of them and when to use one over the other.
+
+
+## Statement vs Expressions 
+
+Statements are actions to be carried out for example:
+
+```py
+n = 7  # Variable assignment statement
+
+def greet(name):  # Function definition statement
+    return f"Hello, {name}!"
+
+if x > 10:  # `if` statement
+    print(greet("Alice"))
+
+for i in range(n):  # `for` loop statement
+    print(i)
+```
+
+Every complete instruction is a statement.
+
+Expressions are a subset of statements and always produce a value. That means we can use that however we need it.
+
+```py
+result = 2 + 2  # Arithmetic expression
+length = len("hello")  # Function call expression
+total_cost = len(items) * cost  # Multiple expressions combined into one
+```
+
+
+## Ternary Expressions
+
+Ternary Expressions get used to combine a few if else statements into one line
+
+Normal:
+```py
+result = 0
+if number % 2 == 0:
+    result = number / 2
+else:
+    result = (number * 3) + 1
+```
+
+
+With Ternary:
+```py
+result = number / 2 if number % 2 == 0 else (number * 3) + 1
+```
+
+
+
+
+
 
 
 
