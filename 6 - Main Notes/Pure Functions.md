@@ -95,6 +95,22 @@ _All i/o is a form of "side effect"._
 
 
 
+## No op
+
+Is a function that doesn't return anything, so its probably there to produce a side effect.
+
+
+
+## Memoization
+
+Memoization is a optimizing technique in programming. At its core its just caching expensive function calls.
+
+
+
+## Referential Transparency
+
+Its just a fancy word that you could replace the function with it would be return value because its the same all the time. All pure functions are referential transparent.
+
 
 
 
