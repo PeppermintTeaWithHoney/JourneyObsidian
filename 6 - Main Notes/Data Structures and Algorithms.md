@@ -2,8 +2,8 @@
 
 Status: Ongoing
 
-Tags: [[Programming]]
-
+Tags: [[Programming]] [[Journey/3 - Tags/Data Structures and Algorithms|Data Structures and Algorithms]]
+l
 # Data Structures and Algorithms
 
 
