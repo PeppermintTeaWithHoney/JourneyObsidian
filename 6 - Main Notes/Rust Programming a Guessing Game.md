@@ -97,7 +97,7 @@ Which could also had been written as:
 io::stdin().read_line(&mut guess).expect("Failed to read line");
 ```
 
-Which just prefer to split it over more than 1 line, to make it easier to read. So we try to split them when we use a new .method_name() syntax. 
+We just prefer to split it over more than 1 line, to make it easier to read. So we try to split them when we use a new .method_name() syntax. 
 
 So read_line puts whatever the user inputs into the string we passed to it. But it also returns a result value. Result is a enumeration, aka enum. Its a type that can be in one of multiple states, we call each possible state a variant. 
 
@@ -249,8 +249,150 @@ Note: We can't just randomly know which traits to use and which methods and func
 
 
 
+Rust only requires imports for:
 
-x
+- **traits** (so their methods are available)
+
+- **types**
+
+
+
+
+```rust
+use std::cmp::Ordering;
+use std::io;
+
+use rand::Rng;
+
+fn main() {
+    // --snip--
+
+    println!("You guessed: {guess}");
+
+    match guess.cmp(&secret_number) {
+        Ordering::Less => println!("Too small!"),
+        Ordering::Greater => println!("Too big!"),
+        Ordering::Equal => println!("You win!"),
+    }
+}
+```
+
+
+So here we add another use statement, bringing a type called ordering into the scope from the standard library. The ordering type is another enum that contains Less,Greater and Equal. These are the only possible outcomes comparing two values. 
+Then we call the .cmp method on guess and we compare it to the secret number. After that it returns a variant of the ordering enum we brought into scope with the use. We use a match expression to decide what to do next based on which variant of Ordering is returned. 
+
+A match expression is made of arms. Each arm consist of a pattern to match against and if the code that should be run matches that arms pattern. Rust takes the value given to match and looks through each arm to see if the pattern fits. Patterns and arms are a powerful Rust feature, that lets your program control things that might happen/encounter and how to handle them all. Arm in this example are the cases. 
+
+But if the try to compile our code it will result in a error. The reasoning is because they are mismatched types. We have a empty string that gets filled, but we need a number instead. 
+Rust has different types for numbers. For example we have 1-100 that is i32, a 32 bit number. u32 a unsigned 32-bit number and i64, a 64 bit number.  Unless specified Rust defaults to an i32, which the type of our secret_number.  So the error is because we compare a string against a number. So we want to convert the string into a number. We do this like this:
+
+
+```rust
+    // --snip--
+
+    let mut guess = String::new();
+
+    io::stdin()
+        .read_line(&mut guess)
+        .expect("Failed to read line");
+
+    let guess: u32 = guess.trim().parse().expect("Please type a number!");
+
+    println!("You guessed: {guess}");
+
+    match guess.cmp(&secret_number) {
+        Ordering::Less => println!("Too small!"),
+        Ordering::Greater => println!("Too big!"),
+        Ordering::Equal => println!("You win!"),
+    }
+
+```
+
+
+so what changed in the guess variable?
+
+Luckily, Rust lets us shadow a variable that lets us a reuse a variable name rather than making a new one. Its commonly used when you want to convert a value from one type to another.
+
+So we bind this variable to the expression guess.trim().parse(). The guess in the expression refers to the original guess  variable that contained the input as a string. The trim method on a string with eliminate all white space at the beginning and the end, because we cant convert that to a number. So we need to do that if we want to convert to u32. You might think we don't need that but we actually do, because if we write 5 into the console, its not actually 5, its 5/n.
+
+The parse method on string converts them to another type. In our case from a string to a number. We need to tell rust the exact number type we want to use, by using let guess: u32.
+The colon after guess tells Rust we'll annotate the variable's type. The u32 is a unsigned, 32-bit integer. It's a good default type for small positive numbers. 
+Rust will also conclude that because we compare guess a u32 to secret_number, that secret_number is also a u32. Making it a comparison between the same types!
+
+The parse method can only work if we write a number or something that can be converted to one. If we would write some weird emoji for example it would cause a error. We handle that with expect! In that case the program will crash and write the error message we wrote earlier.
+
+Currently we only have one try to guess the number, we want to change that. 
+
+```rust
+    // --snip--
+
+    println!("The secret number is: {secret_number}");
+
+    loop {
+        println!("Please input your guess.");
+
+        // --snip--
+
+        match guess.cmp(&secret_number) {
+            Ordering::Less => println!("Too small!"),
+            Ordering::Greater => println!("Too big!"),
+            Ordering::Equal => println!("You win!"),
+        }
+    }
+}
+```
+
+We just put everything into a loop.
+
+
+How do we quit the program if we guess right? 
+
+
+we could just use a break statement.
+
+```rust
+        // --snip--
+
+        match guess.cmp(&secret_number) {
+            Ordering::Less => println!("Too small!"),
+            Ordering::Greater => println!("Too big!"),
+            Ordering::Equal => {
+                println!("You win!");
+                break;
+            }
+        }
+    }
+}
+```
+
+
+
+So how do we improve the Error handling? So far our program crashes if we get a wrong input. 
+
+
+```rust
+        // --snip--
+
+        io::stdin()
+            .read_line(&mut guess)
+            .expect("Failed to read line");
+
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
+
+        println!("You guessed: {guess}");
+
+        // --snip--
+
+```
+
+
+We switch from a expect to a match expression to move from crashing the error to handling it. 
+Parse returns a result type, Ok or Error. It can only be these two, so we just handle both and our program won't crash anymore. It will return the errror Err( _ ) the underscore stands for catch all. So if it hits that, we just continue.
+
+
 
 
 
