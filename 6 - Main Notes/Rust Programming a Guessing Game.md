@@ -390,7 +390,7 @@ So how do we improve the Error handling? So far our program crashes if we get a 
 
 
 We switch from a expect to a match expression to move from crashing the error to handling it. 
-Parse returns a result type, Ok or Error. It can only be these two, so we just handle both and our program won't crash anymore. It will return the errror Err( _ ) the underscore stands for catch all. So if it hits that, we just continue.
+Parse returns a result type, Ok or Error. It can only be these two, so we just handle both and our program won't crash anymore. It will return the error Err( _ ) the underscore stands for catch all. So if it hits that, we just continue.
 
 
 
