@@ -2,7 +2,7 @@
 
 Status: Ongoing
 
-Tags: [[Git]], [[Programming]] tt
+Tags: [[Git]], [[Programming]]
 
 
 ## Git Project Management
