@@ -87,6 +87,105 @@ The measurement is: 5h
 
 
 
+### Statements and Expressions
+
+Function bodies are made up of series of statements optionally ending in a expression. 
+So far do the functions we have covered not included a ending expression but we had expressions as part of statements.  Because Rust is a expression based languages its important to understand. 
+
+Statements are instructions that perform some action and do nut return a value.
+
+Expressions evaluate to a resultant value.
+
+
+
+Lets look at examples:
+
+```rust
+fn main() {
+    let y = 6;
+}
+```
+
+Creating a variable and assigning a value to it with the let keyword is a statement. 
+
+Function definitions are also statements, the entire preceding example is a statement in itself.(As we’ll see below, _calling_ a function is not a statement, though.)
+
+Statements don't return any value, so we can't assign them to another variable. 
+If we try that in the following code:
+
+```rust
+fn main() {
+    let x = (let y = 6);
+}
+```
+
+we will get the following error:
+
+```bash
+$ cargo run
+   Compiling functions v0.1.0 (file:///projects/functions)
+error: expected expression, found `let` statement
+ --> src/main.rs:2:14
+  |
+2 |     let x = (let y = 6);
+  |              ^^^
+  |
+  = note: only supported directly in conditions of `if` and `while` expressions
+
+warning: unnecessary parentheses around assigned value
+ --> src/main.rs:2:13
+  |
+2 |     let x = (let y = 6);
+  |             ^         ^
+  |
+  = note: `#[warn(unused_parens)]` on by default
+help: remove these parentheses
+  |
+2 -     let x = (let y = 6);
+2 +     let x = let y = 6;
+  |
+
+warning: `functions` (bin "functions") generated 1 warning
+error: could not compile `functions` (bin "functions") due to 1 previous error; 1 warning emitted
+
+```
+
+The let y = 6 statement doesn't return a value so we cant bind it to x.
+Expressions evaluate to a value and make up most of the rest of code i'll write in Rust.
+Consider a simple math operation such as 5+6, is a expression that evaluate to 11. 
+Expressions can be part of a statement, like in the earlier example let y = 6, the 6 is a expression that evaluates to the value 6. Calling a function is a expression and calling a macro is too. A new scope block with curly brackets is an expression. 
+
+```rust
+fn main() {
+    let y = {
+        let x = 3;
+        x + 1
+    };
+
+    println!("The value of y is: {y}");
+}
+```
+
+This expression 
+
+```rust
+{
+    let x = 3;
+    x + 1
+}
+```
+
+is a block, that in this case evaluates to 4 and the value gets bound to y as part of the let statement. Note that the x + 1 line doesn't have a semicolon at the end, which is unlike the lines we saw before. Expressions do not include semicolons. If we add a semicolon to the end of a expression, we turn it into a statement and it wont return a value.
+
+
+
+
+
+
+
+
+
+
 # References
 
 
