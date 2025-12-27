@@ -181,6 +181,82 @@ is a block, that in this case evaluates to 4 and the value gets bound to y as pa
 
 
 
+### Functions with return values
+
+
+Functions can return values to the code that calls them, but we must declare their type after an arrow -->. In Rust, the return value of a function is synonymous with the value of the final expression in the code of the body of a function. We can return early using the return keyword and specifying a value. But most functions return the last expression implicitly.
+Here is an example of a function that returns a value:
+
+```rust
+fn five() -> i32 {
+    5
+}
+
+fn main() {
+    let x = five();
+
+    println!("The value of x is: {x}");
+}
+```
+
+
+As we can see there is no function calls,macros or even let statements in the five function, just the number itself. That's a perfectly valid function in Rust. And we specified the return type too with i32.
+
+```bash
+$ cargo run
+   Compiling functions v0.1.0 (file:///projects/functions)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.30s
+     Running `target/debug/functions`
+The value of x is: 5
+```
+
+The return value of the five functions is 5 and its i32. The line let x = five() assigns x to the return value of the five function. So this would evaluate to let x = 5. 
+
+Also the five functions has no parameter and defines the type of the return value already. 
+The body of the function is a expression without ;  and we want to return the value. 
+
+```rust
+fn main() {
+    let x = plus_one(5);
+
+    println!("The value of x is: {x}");
+}
+
+fn plus_one(x: i32) -> i32 {
+    x + 1
+}
+```
+This will print The value of x is: 6
+If we would remove the semicolon from it we would get the following error:
+
+```bash
+$ cargo run
+   Compiling functions v0.1.0 (file:///projects/functions)
+error[E0308]: mismatched types
+ --> src/main.rs:7:24
+  |
+7 | fn plus_one(x: i32) -> i32 {
+  |    --------            ^^^ expected `i32`, found `()`
+  |    |
+  |    implicitly returns `()` as its body has no tail or `return` expression
+8 |     x + 1;
+  |          - help: remove this semicolon to return this value
+
+For more information about this error, try `rustc --explain E0308`.
+error: could not compile `functions` (bin "functions") due to 1 previous error
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
